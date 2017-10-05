@@ -1,0 +1,53 @@
+[user]
+  name = Joshua Herkness
+  email = joshherkness@gmail.com
+
+[github]
+  user = joshherkness
+
+[core]
+  excludesfile = ~/.gitignore_global
+  editor = vim
+  filemode = false
+  trustctime = false
+  autocrlf = input
+  pager = diff-so-fancy | less --tabs=4 -RFX
+
+[alias]
+  st = status
+  sts = status -sb
+  stl = ls-files -m -o --exclude-standard
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff --word-diff
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  ll = log --pretty=oneline --graph --abbrev-commit
+  lm = log --pretty=format:'* %s (%h)'
+  lg = log -p
+  g = grep --break --heading --line-number
+  amend = commit --amend --reuse-message=HEAD
+
+[color]
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+
+[credential]
+  helper = osxkeychain

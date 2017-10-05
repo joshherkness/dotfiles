@@ -1,0 +1,51 @@
+export DOTFILES_DIR=$HOME/.dotfiles
+export ZSH_DOTFILES_DIR=$DOTFILES_DIR/zsh
+export ZPLUG_HOME=/usr/local/opt/zplug
+
+export ZSH=$HOME/.oh-my-zsh
+
+function command_exists() {
+  type "$1" > /dev/null 2>&1
+}
+
+# Configure theme
+ZSH_THEME="mh"
+
+
+[[ -e ~/.terminfo ]] && export TERMINFO_DIRS=~/.terminfo:/usr/share/terminfo
+
+#sourceall .zsh files inside of the zsh/ directory
+for config ($ZSH_DOTFILES_DIR/**/*.zsh) source $config
+
+# preferred editors
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
+
+[ -z "$TMUX" ] && export TERM=xterm-256color-italic
+
+# install rbenv
+if command_exists rbenv; then
+  eval "$(rbenv init -)"
+fi
+
+if [[ -d ~/.rvm ]]; then
+  PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+  source ~/.rvm/scripts/rvm
+fi
+
+export ZPLUG_LOADFILE=$DOTFILES_DIR/zsh/zplug.sh
+# Only source zplug on initial load
+if [ -z ${RELOAD} ]; then
+  if ! [ type "zplug" > /dev/null 2>&1 ]; then
+    source $ZPLUG_HOME/init.zsh
+  fi
+fi
+
+source $ZSH/oh-my-zsh.sh
+
+plugins=(git nmp git-flow)
+
+# Base16 shell setup
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
