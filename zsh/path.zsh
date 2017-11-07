@@ -23,6 +23,8 @@ prepend-path "/sbin"
 prepend-path "/usr/sbin"
 prepend-path "/usr/local/sbin"
 prepend-path "$HOME/.rvm/bin"
+prepend-path "$HOME/.npm-packages/bin"
+prepend-path "/Library/TeX/texbin/"
 
 # Remove duplicates (preserving prepended items)
 # Source: http://unix.stackexchange.com/a/40755
