@@ -39,6 +39,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'sickill/vim-pasta'
+Plug 'sbdchd/neoformat'
 
 """"""""""""""""""""
 " Other
