@@ -34,7 +34,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Raimondi/delimitMate'
-Plug 'sheerun/vim-polyglot'
 Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
@@ -51,6 +50,7 @@ Plug 'tpope/vim-fugitive'
 " Javascript
 """"""""""""""""""""
 Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
 
 """"""""""""""""""""
 " Markdown
@@ -67,7 +67,6 @@ Plug 'honza/vim-snippets'
 """"""""""""""""""""
 " Autocomplete
 """"""""""""""""""""
-" Plug 'Valloric/YouCompleteMe'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs'
 Plug 'ternjs/tern_for_vim'
