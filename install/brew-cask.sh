@@ -1,28 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Function tests whether a Homebrew formula is installed
-function formula_installed() {
-  brew list -1 | grep -q $1
-}
-
-# Function tests whether a Homebrew cask has been installed
-function cask_installed() {
-  brew cask list | grep -q $1
-}
-
-# Allow the use of Homebrew Casks:
-# https://github.com/phinze/homebrew-cask
-brew tap phinze/cask > /dev/null 2>&1
-formula_installed brew-cask || brew install brew-cask
+log_message $(create_heading "Casks")
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # These are the casks that will be installed
-casks=(
+apps=(
   discord
   dropbox
   google-chrome
-  intellij-idea-ce
   iterm2
   numi
   1password
@@ -31,10 +17,14 @@ casks=(
   visual-studio-code
 )
 
-for cask in ${casks[@]}; do
-  if ! cask_installed $cask; then
-    brew cask install $cask
+# ======================================================
+# Install Homebrew casks
+# ======================================================
+log_message "Installing Homebrew casks"
+for app in ${apps[@]}; do
+  if ! cask_installed $app; then
+    brew cask install $app
   else
-    echo "$cask has already been installed... skipping"
+    log_warning_message "[$app] has already been installed, skipping"
   fi
 done

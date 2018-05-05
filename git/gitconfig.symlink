@@ -27,6 +27,7 @@
   lg = log -p
   g = grep --break --heading --line-number
   amend = commit --amend --reuse-message=HEAD
+	conflicts = !git ls-files -u | cut -f 2 | sort -u
 
 [color]
   ui = auto

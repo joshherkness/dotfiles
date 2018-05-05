@@ -5,6 +5,9 @@ set -g @plugin 'jimeh/tmux-themepack'
 # Allow for italic support
 set-option -g default-terminal "tmux-256color-italic"
 
+# Tmux theme
+set -g @themepack 'powerline/block/cyan'
+
 # Setup vim-tmux-navigation bindings
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
   | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"

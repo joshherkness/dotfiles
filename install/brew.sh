@@ -1,37 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Function tests whether a Homebrew formula is installed
-function formula_installed() {
-  brew list -1 | grep -q $1
-}
+log_message $(create_heading "Homebrew")
 
-# Check to ensure Homebrew isn't already installed
-if test ! $(which brew); then
-  echo "Installing Homebrew"
-
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-# Ensure that Homebrew was installed successfully
-if test ! $(which brew); then
-  echo >&2 "Cannot find the 'brew' command."
-fi
-
-# Install Homebrew formulas
-formulas=(
+FORMULAS=(
   diff-so-fancy
   fzf
   git
-  heroku
-  heroku-toolbelt
   mongodb
   mysql
   neovim
   node
   openssl
   pandoc
-  python3
   rbenv
+  python
   ruby-build
   watchman
   z
@@ -39,10 +21,36 @@ formulas=(
   zplug
 )
 
-for formula in ${formulas[@]}; do
-  if ! formula_installed $formula; then
-    brew install $formula
-  else
-    echo "$formula has already been installed... skipping."
-  fi
-done
+# ======================================================
+# Check for Homebrew installation and install if necessary.
+# ======================================================
+if test ! $(which brew); then
+  log_message "Installing Homebrew..."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+  log_warning_message "Homebrew is already installed, skipping."
+fi
+
+# ======================================================
+# This function is used to install brew formula.
+# ======================================================
+function install_brew_formula() {
+  for FORMULA in ${FORMULAS[@]}; do
+    if ! formula_installed $FORMULA; then
+      brew install $FORMULA
+    else
+      log_warning_message "[$FORMULA] is already installed, skipping."
+    fi
+  done
+}
+
+# ======================================================
+# Test that brew was installed successfully in order to install formula.
+# ======================================================
+log_message $(create_heading "Homebrew formula")
+if test ! $(which brew); then
+  log_error_message "Cannot find the 'brew' command. Please install manually."
+else
+  install_brew_formula
+fi
+
